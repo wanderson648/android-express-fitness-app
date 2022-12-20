@@ -12,38 +12,24 @@
         tools:context=".FormImcActivity">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginVertical="16dp"
+            style="@style/StyleTextViewForm"
             android:text="@string/imc_desc" />
 
         <EditText
             android:id="@+id/edit_height"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
+            style="@style/StyleTextForm"
             android:hint="@string/height"
-            android:inputType="number"
-            android:maxLength="3"
             tools:ignore="Autofill" />
 
         <EditText
             android:id="@+id/edit_weight"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
+            style="@style/StyleTextForm"
             android:hint="@string/weight"
-            android:inputType="number"
-            android:maxLength="3"
             tools:ignore="Autofill" />
 
         <Button
             android:id="@+id/btn_calculate_imc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginVertical="24dp"
+            style="@style/StyleButtonForm"
             android:text="@string/calc" />
 
     </LinearLayout>
