@@ -1,8 +1,10 @@
 package com.example.fitnessapp
 
+import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -40,18 +42,27 @@ class FormImcActivity : AppCompatActivity() {
             val weight = editWeight.text.toString().toInt()
 
             val result = calculateImc(height, weight)
-            val imcResposeId = imcResponse(result)
-            Log.i("test", "imc: $result")
+            val imcResponseId = imcResponse(result)
 
-           AlertDialog.Builder(this)
-               .setTitle(getString(R.string.imc_response, result))
-               .setMessage(imcResposeId)
-               .setPositiveButton(android.R.string.ok) { _, _ -> }
-               .create()
-               .show()
+            alertDialog(result, imcResponseId)
+            hideKeyboard()
 
         }
 
+    }
+
+    private fun hideKeyboard() {
+        val service = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+        service.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+    }
+
+    private fun alertDialog(result: Double, imcResponseId: Int) {
+        AlertDialog.Builder(this)
+            .setTitle(getString(R.string.imc_response, result))
+            .setMessage(imcResponseId)
+            .setPositiveButton(android.R.string.ok) { _, _ -> }
+            .create()
+            .show()
     }
 
     @StringRes
