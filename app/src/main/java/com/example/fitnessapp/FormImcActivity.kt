@@ -1,11 +1,13 @@
 package com.example.fitnessapp
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.StringRes
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 
 class FormImcActivity : AppCompatActivity() {
@@ -41,11 +43,13 @@ class FormImcActivity : AppCompatActivity() {
             val imcResposeId = imcResponse(result)
             Log.i("test", "imc: $result")
 
-            Toast.makeText(
-                this,
-                imcResposeId,
-                Toast.LENGTH_LONG
-            ).show()
+           AlertDialog.Builder(this)
+               .setTitle(getString(R.string.imc_response, result))
+               .setMessage(imcResposeId)
+               .setPositiveButton(android.R.string.ok) { _, _ -> }
+               .create()
+               .show()
+
         }
 
     }
@@ -63,7 +67,7 @@ class FormImcActivity : AppCompatActivity() {
             else -> R.string.imc_extreme_weight
         }
     }
-    
+
     private fun calculateImc(height: Int, weight: Int): Double {
         return weight / ((height / 100.0) * (height / 100.0))
     }
