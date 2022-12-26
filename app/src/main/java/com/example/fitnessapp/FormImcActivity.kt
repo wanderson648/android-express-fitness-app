@@ -83,7 +83,7 @@ class FormImcActivity : AppCompatActivity() {
         return weight / ((height / 100.0) * (height / 100.0))
     }
 
-    private fun validate() : Boolean {
+    private fun validate(): Boolean {
         val height = editHeight.text.toString()
         val weight = editWeight.text.toString()
 
