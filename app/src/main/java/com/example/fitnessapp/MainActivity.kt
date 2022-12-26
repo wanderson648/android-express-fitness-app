@@ -40,34 +40,31 @@ class MainActivity : AppCompatActivity() {
 
         rvMain = findViewById(R.id.rv_main_item)
 
-        val adapter = MainAdapter(mainItems, object : OnItemClickListener {
-            override fun onClick(id: Int) {
-                when(id) {
-                    1 -> {
-                        startActivity(
-                            Intent(
-                                this@MainActivity,
-                                FormImcActivity::class.java
-                            )
+        val adapter = MainAdapter(mainItems) { id ->
+            when (id) {
+                1 -> {
+                    startActivity(
+                        Intent(
+                            this,
+                            FormImcActivity::class.java
                         )
-                    }
-                    2 -> Toast.makeText(
-                        this@MainActivity, "Sem activity", Toast.LENGTH_LONG).show()
+                    )
                 }
+                2 -> Toast.makeText(
+                    this, "Sem activity", Toast.LENGTH_LONG
+                ).show()
             }
+        }
 
-        })
         rvMain.adapter = adapter
         rvMain.layoutManager = GridLayoutManager(this, 2)
 
     }
 
 
-
-
     private inner class MainAdapter(
         private val mainItems: List<MainItem>,
-        private val onItemClickListener: OnItemClickListener
+        private val onItemClickListener: (Int) -> Unit
     ) : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -98,7 +95,7 @@ class MainActivity : AppCompatActivity() {
                 containerItem.setBackgroundColor(item.color)
 
                 containerItem.setOnClickListener {
-                    onItemClickListener.onClick(item.id)
+                    onItemClickListener.invoke(item.id)
                 }
             }
 
