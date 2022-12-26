@@ -1,19 +1,20 @@
 package com.example.fitnessapp
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), OnItemClickListener {
 
     private lateinit var rvMain: RecyclerView
 
@@ -38,14 +39,33 @@ class MainActivity : AppCompatActivity() {
         )
 
         rvMain = findViewById(R.id.rv_main_item)
-        val adapter = MainAdapter(mainItems)
+        val adapter = MainAdapter(mainItems, this)
         rvMain.adapter = adapter
         rvMain.layoutManager = GridLayoutManager(this, 2)
 
     }
 
+
+    override fun onClick(id: Int) {
+        when(id) {
+            1 -> {
+                startActivity(
+                    Intent(
+                        this,
+                        FormImcActivity::class.java
+                    )
+                )
+            }
+            2 -> Toast.makeText(this, "Sem activity", Toast.LENGTH_LONG).show()
+        }
+    }
+
+
+
+
     private inner class MainAdapter(
-        private val mainItems: List<MainItem>
+        private val mainItems: List<MainItem>,
+        private val onItemClickListener: OnItemClickListener
     ) : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -74,6 +94,10 @@ class MainActivity : AppCompatActivity() {
                 textItem.setText(item.stringRes)
                 imgView.setImageResource(item.drawableRes)
                 containerItem.setBackgroundColor(item.color)
+
+                containerItem.setOnClickListener {
+                    onItemClickListener.onClick(item.id)
+                }
             }
 
         }
