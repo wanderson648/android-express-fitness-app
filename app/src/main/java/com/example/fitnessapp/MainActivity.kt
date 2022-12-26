@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class MainActivity : AppCompatActivity(), OnItemClickListener {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var rvMain: RecyclerView
 
@@ -39,25 +39,27 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
         )
 
         rvMain = findViewById(R.id.rv_main_item)
-        val adapter = MainAdapter(mainItems, this)
+
+        val adapter = MainAdapter(mainItems, object : OnItemClickListener {
+            override fun onClick(id: Int) {
+                when(id) {
+                    1 -> {
+                        startActivity(
+                            Intent(
+                                this@MainActivity,
+                                FormImcActivity::class.java
+                            )
+                        )
+                    }
+                    2 -> Toast.makeText(
+                        this@MainActivity, "Sem activity", Toast.LENGTH_LONG).show()
+                }
+            }
+
+        })
         rvMain.adapter = adapter
         rvMain.layoutManager = GridLayoutManager(this, 2)
 
-    }
-
-
-    override fun onClick(id: Int) {
-        when(id) {
-            1 -> {
-                startActivity(
-                    Intent(
-                        this,
-                        FormImcActivity::class.java
-                    )
-                )
-            }
-            2 -> Toast.makeText(this, "Sem activity", Toast.LENGTH_LONG).show()
-        }
     }
 
 
