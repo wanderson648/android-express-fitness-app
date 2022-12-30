@@ -1,5 +1,6 @@
 package com.example.fitnessapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
@@ -27,7 +28,7 @@ class FormImcActivity : AppCompatActivity() {
 
 
         btnCalculate.setOnClickListener {
-            if(!validate()) {
+            if (!validate()) {
                 Toast.makeText(
                     this,
                     R.string.fields_message,
@@ -70,11 +71,12 @@ class FormImcActivity : AppCompatActivity() {
                     dao.insert(Calc(type = "imc", res = result))
 
                     runOnUiThread {
-                        Toast.makeText(
-                            this@FormImcActivity,
-                            R.string.calc_saved,
-                            Toast.LENGTH_LONG
-                        ).show()
+                        startActivity(
+                            Intent(
+                                this@FormImcActivity,
+                                ListCalcActivity::class.java
+                            ).putExtra("type", "imc")
+                        )
                     }
                 }.start()
             }
