@@ -48,7 +48,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/btn_calculate_imc"
+            android:id="@+id/btn_calculate_tmb"
             style="@style/StyleButtonForm"
             android:text="@string/calc" />
 
