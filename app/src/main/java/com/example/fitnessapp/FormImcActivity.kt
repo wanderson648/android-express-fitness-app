@@ -62,9 +62,7 @@ class FormImcActivity : AppCompatActivity() {
         AlertDialog.Builder(this)
             .setTitle(getString(R.string.imc_response, result))
             .setMessage(imcResponseId)
-            .setPositiveButton(android.R.string.ok) { _, _ -> }
-
-            .setNegativeButton(R.string.save) { _, _ ->
+            .setPositiveButton(R.string.save) { _, _ ->
                 Thread {
                     val app = application as App
                     val dao = app.db.calcDao()
