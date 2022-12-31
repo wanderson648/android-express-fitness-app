@@ -1,15 +1,14 @@
 package com.example.fitnessapp
 
 import android.annotation.SuppressLint
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SimpleAdapter
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.fitnessapp.FormImcActivity.Companion.TYPE
 import com.example.fitnessapp.model.Calc
 import java.text.SimpleDateFormat
 import java.util.*
@@ -33,8 +32,8 @@ class ListCalcActivity : AppCompatActivity() {
         rvListCalc.layoutManager = LinearLayoutManager(this)
 
 
-        val type = intent?.extras?.getString("type")
-            ?: throw IllegalStateException("type not found")
+        val type = intent?.extras?.getString(TYPE)
+            ?: throw IllegalStateException("Type not found")
 
         Thread {
             val app = application as App
