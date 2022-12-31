@@ -50,9 +50,14 @@ class MainActivity : AppCompatActivity() {
                         )
                     )
                 }
-                2 -> Toast.makeText(
-                    this, "Sem activity", Toast.LENGTH_LONG
-                ).show()
+                2 -> {
+                    startActivity(
+                        Intent(
+                            this,
+                            TmbActivity::class.java
+                        )
+                    )
+                }
             }
         }
 
